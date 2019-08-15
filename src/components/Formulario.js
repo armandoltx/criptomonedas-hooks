@@ -8,6 +8,11 @@ function Formulario() {
   //State
   const [criptomonedas, guardarCripotomonedas] = useState([]); // es un arreglo, porque lo q retorna de la Api es un array
 
+  // antes de enviar la peticion del usuario de lo q el usuario quiere cotizar, tenemos q poner esas peticiones en el state y tb poderlas validar
+  const [monedaCotizar, guardaraMonedaCotizar] = useState('');
+  const [criptoCotizar, guardarCriptoCotiar] = useState('');
+  const [error, guardarError] = useState(false);
+
   const consultarAPI = async () => {
     const url = 'https://min-api.cryptocompare.com/data/top/totaltoptiervolfull?limit=10&tsym=AUD'
 
@@ -30,7 +35,10 @@ return(
     <form action="">
       <div className="row">
         <label htmlFor="">Elige tu moneda</label>
-        <select name="" id="" className='u-full-width'>
+        <select
+          className='u-full-width'
+          onChange={(e) => {guardaraMonedaCotizar(e.target.value)}}
+        >
           <option value="">-- Elige Tu Moneda --</option>
           <option value="USD">Dolar Estadounidense</option>
           <option value="MXN">Peso Mexicano</option>
@@ -41,7 +49,11 @@ return(
       </div>
       <div className="row">
         <label htmlFor="">Elige tu Criptomoneda</label>
-        <select name="" id="" className='u-full-width'>
+        <select
+          className='u-full-width'
+        onChange={(e) => { guardarCriptoCotiar(e.target.value) }}
+        >
+        <option value="">-- Elige Tu CriptoMoneda --</option>
           { criptomonedas.map( cripto => (
               <Criptomoneda
                 key={cripto.CoinInfo.Id}
