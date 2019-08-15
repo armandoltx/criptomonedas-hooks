@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Criptomoneda from './Criptomoneda';
 
 
 function Formulario() {
@@ -40,7 +41,14 @@ return(
       </div>
       <div className="row">
         <label htmlFor="">Elige tu Criptomoneda</label>
-        <select name="" id="" className='u-full-width'></select>
+        <select name="" id="" className='u-full-width'>
+          { criptomonedas.map( cripto => (
+              <Criptomoneda
+                key={cripto.CoinInfo.Id}
+                criptomoneda={cripto}
+              />
+          )) }
+        </select>
       </div>
     </form>
   )
