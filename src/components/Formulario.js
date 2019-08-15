@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 function Formulario() {
-  return(
+
+  //State
+  const [criptomonedas, guardarCripotomonedas] = useState([]); // es un arreglo, porque lo q retorna de la Api es un array
+
+  const consultarAPI = async () => {
+    const url = 'https://min-api.cryptocompare.com/data/top/totaltoptiervolfull?limit=10&tsym=AUD'
+
+    const resultado = await axios(url);
+
+    console.log('resultado ', resultado.data.Data);
+
+    // colocar respuesta en el state
+    guardarCripotomonedas(resultado.data.Data);
+  }
+  // ahora podemos hacer console.log(criptomonedas), tiene q ser el mismo valor q en resutaldo
+  console.log('criptomonedas ', criptomonedas);
+
+  useEffect(
+    () => {
+      consultarAPI();
+    },[]
+  );
+return(
     <form action="">
       <div className="row">
         <label htmlFor="">Elige tu moneda</label>
