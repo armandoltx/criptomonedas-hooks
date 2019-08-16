@@ -4,7 +4,7 @@ import Criptomoneda from './Criptomoneda';
 import Error from './Error'
 
 
-function Formulario() {
+function Formulario({ guardarMoneda, guardarCriptomoneda }) {
 
   //State
   const [criptomonedas, guardarCripotomonedas] = useState([]); // es un arreglo, porque lo q retorna de la Api es un array
@@ -44,8 +44,12 @@ function Formulario() {
     }
 
 
-    // pasar al componente principal
+    ////// pasar al componente principal
+    // primero ponemos el error como false
+    // ahora anadimos las funiones de cambio de state q hemos definido en app y estamos pasando como props
     guardarError(false);
+    guardarMoneda(monedaCotizar);
+    guardarCriptomoneda(criptoCotizar);
 
   }
 
